@@ -19,6 +19,8 @@
  *   '',  'bb'  => 'bb'
  */
 function concatenateStrings(/* value1, value2 */) {
+  const args = arguments[0] + arguments[1];
+  return args ;
   throw new Error('Not implemented');
 }
 
@@ -35,6 +37,7 @@ function concatenateStrings(/* value1, value2 */) {
  *   ''      => 0
  */
 function getStringLength(/* value */) {
+  return arguments[0].length;
   throw new Error('Not implemented');
 }
 
@@ -52,6 +55,7 @@ function getStringLength(/* value */) {
  *   'Chuck','Norris'  => 'Hello, Chuck Norris!'
  */
 function getStringFromTemplate(/* firstName, lastName */) {
+  return `Hello, ${arguments[0]} ${arguments[1]}!`;
   throw new Error('Not implemented');
 }
 
@@ -66,6 +70,7 @@ function getStringFromTemplate(/* firstName, lastName */) {
  *   'Hello, Chuck Norris!' => 'Chuck Norris'
  */
 function extractNameFromTemplate(/* value */) {
+  return arguments[0].slice(7).replace('!','');
   throw new Error('Not implemented');
 }
 
@@ -81,6 +86,7 @@ function extractNameFromTemplate(/* value */) {
  *   'cat'       => 'c'
  */
 function getFirstChar(/* value */) {
+  return arguments[0][0];
   throw new Error('Not implemented');
 }
 
@@ -96,6 +102,7 @@ function getFirstChar(/* value */) {
  *   '\tHello, World! ' => 'Hello, World!'
  */
 function removeLeadingAndTrailingWhitespaces(/* value */) {
+  return arguments[0].trim();
   throw new Error('Not implemented');
 }
 
@@ -111,6 +118,11 @@ function removeLeadingAndTrailingWhitespaces(/* value */) {
  *   'cat', 3 => 'catcatcat'
  */
 function repeatString(/* value, count */) {
+  let data= '';
+  for (let index = 0; index < arguments[1]; index++) {
+   data=data.concat(arguments[0]);
+  }
+  return data;
   throw new Error('Not implemented');
 }
 
@@ -127,6 +139,7 @@ function repeatString(/* value, count */) {
  *   'ABABAB','BA' => 'ABAB'
  */
 function removeFirstOccurrences(/* str, value */) {
+  return arguments[0].replace(arguments[1],'');
   throw new Error('Not implemented');
 }
 
@@ -142,6 +155,7 @@ function removeFirstOccurrences(/* str, value */) {
  *   '<a>' => 'a'
  */
 function unbracketTag(/* str */) {
+  return arguments[0].replace(new RegExp('<|>', 'g'),'');
   throw new Error('Not implemented');
 }
 
@@ -157,6 +171,7 @@ function unbracketTag(/* str */) {
  *  'abcdefghijklmnopqrstuvwxyz' => 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
  */
 function convertToUpperCase(/* str */) {
+  return arguments[0].toUpperCase();
   throw new Error('Not implemented');
 }
 
@@ -176,6 +191,7 @@ function convertToUpperCase(/* str */) {
  *   'info@gmail.com' => ['info@gmail.com']
  */
 function extractEmails(/* str */) {
+  return [...arguments[0].split(';')]; //
   throw new Error('Not implemented');
 }
 
@@ -203,6 +219,15 @@ function extractEmails(/* str */) {
  *
  */
 function getRectangleString(/* width, height */) {
+  let result = '';
+  result = result + '┌' + '─'.repeat(arguments[0]- 2) + '┐\n';
+
+  for (let i = 0; i < arguments[1]- 2; i++) {
+    result = result + '│' + ' '.repeat(arguments[0]- 2) + '│\n';
+  }
+
+  result = result + '└' + '─'.repeat(arguments[0]- 2) + '┘\n';
+  return result;
   throw new Error('Not implemented');
 }
 
@@ -224,6 +249,18 @@ function getRectangleString(/* width, height */) {
  *
  */
 function encodeToRot13(/* str */) {
+  const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+  const output = 'NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm';
+  let result = '';
+   for (let i = 0; i < arguments[0].length; i++)  {
+      const ch = arguments[0][i];
+    if (ch.toUpperCase() !== ch.toLowerCase()) {
+      result += output[alphabet.indexOf(ch)];
+    } else {
+      result += ch;
+    }
+  }
+  return result;
   throw new Error('Not implemented');
 }
 
@@ -241,6 +278,7 @@ function encodeToRot13(/* str */) {
  *   isString(new String('test')) => true
  */
 function isString(/* value */) {
+  return typeof arguments[0] === 'string' || (arguments[0] instanceof String);
   throw new Error('Not implemented');
 }
 
@@ -270,6 +308,14 @@ function isString(/* value */) {
  *   'K♠' => 51
  */
 function getCardId(/* value */) {
+  const deck =
+  [
+    'A♣', '2♣', '3♣', '4♣', '5♣', '6♣', '7♣', '8♣', '9♣', '10♣', 'J♣', 'Q♣', 'K♣',
+    'A♦', '2♦', '3♦', '4♦', '5♦', '6♦', '7♦', '8♦', '9♦', '10♦', 'J♦', 'Q♦', 'K♦',
+    'A♥', '2♥', '3♥', '4♥', '5♥', '6♥', '7♥', '8♥', '9♥', '10♥', 'J♥', 'Q♥', 'K♥',
+    'A♠', '2♠', '3♠', '4♠', '5♠', '6♠', '7♠', '8♠', '9♠', '10♠', 'J♠', 'Q♠', 'K♠',
+  ];
+  return deck.indexOf(arguments[0]);
   throw new Error('Not implemented');
 }
 
